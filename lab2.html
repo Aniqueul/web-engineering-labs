@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moiz's Web Page</title>
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header>
+      <h1>Welcome to <mark>Moiz's Website</mark></h1>
+      <p>Your go-to place for learning HTML basics!</p>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav>
+      <a href="#home">Home</a> | <a href="#about">About</a> |
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+      <h2>About This Page</h2>
+      <p>
+        This page demonstrates basic <mark>HTML elements</mark> for structure
+        and multimedia.
+      </p>
+
+      <p>
+        Today's date is <time datetime="2025-10-13">October 13, 2025</time>.
+      </p>
+
+      <!-- Canvas Example -->
+      <h3>My Canvas Area</h3>
+      <canvas
+        id="myCanvas"
+        width="300"
+        height="150"
+        style="border: 1px solid #000000"
+      >
+        Your browser does not support the canvas element.
+      </canvas>
+
+      <!-- Audio Example -->
+      <h3>Listen to an Audio Clip</h3>
+      <audio controls>
+        <source src="sample.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+
+      <!-- Video Example -->
+      <h3>Watch a Video</h3>
+      <video width="320" height="240" controls>
+        <source src="sample.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      <!-- Form Example -->
+      <h3>Contact Form</h3>
+      <form action="#" method="post">
+        <label>Name:</label>
+        <input type="text" name="name" required /><br /><br />
+        <label>Email:</label>
+        <input type="email" name="email" required /><br /><br />
+        <input type="submit" value="Submit" />
+      </form>
+    </main>
+
+    <!-- Conditional Comments for IE -->
+    <!--[if IE]>
+      <p>
+        You are using Internet Explorer, some features may not display properly.
+      </p>
+    <![endif]-->
+
+    <!-- Footer Section -->
+    <footer>
+      <p>
+        &copy; 2025 Moiz's Website | Follow us on <a href="#">Facebook</a>,
+        <a href="#">Twitter</a>
+      </p>
+    </footer>
+  </body>
+</html>
