@@ -1,0 +1,163 @@
+/* GLOBAL STYLES */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: #f5f6fa;
+  color: #333;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+/* 12-COLUMN GRID SYSTEM */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+
+[class*="col-"] {
+  padding: 15px;
+}
+
+/* Define columns for large screens */
+.col-1 {
+  width: 8.33%;
+}
+.col-2 {
+  width: 16.66%;
+}
+.col-3 {
+  width: 25%;
+}
+.col-4 {
+  width: 33.33%;
+}
+.col-5 {
+  width: 41.66%;
+}
+.col-6 {
+  width: 50%;
+}
+.col-7 {
+  width: 58.33%;
+}
+.col-8 {
+  width: 66.66%;
+}
+.col-9 {
+  width: 75%;
+}
+.col-10 {
+  width: 83.33%;
+}
+.col-11 {
+  width: 91.66%;
+}
+.col-12 {
+  width: 100%;
+}
+
+/* RESPONSIVE BREAKPOINTS */
+@media (max-width: 992px) {
+  .col-6,
+  .col-4,
+  .col-3 {
+    width: 50%;
+  }
+}
+
+@media (max-width: 600px) {
+  .col-6,
+  .col-4,
+  .col-3,
+  .col-12 {
+    width: 100%;
+  }
+}
+
+/* HEADER */
+header {
+  background: #004aad;
+  color: white;
+  text-align: center;
+  padding: 30px 10px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+
+header p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* ABOUT */
+.about {
+  align-items: center;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.profile img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.intro h2 {
+  color: #004aad;
+  margin-bottom: 10px;
+}
+
+/* SKILLS */
+.skill-card {
+  background: #004aad;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 5px 0;
+  font-weight: 500;
+}
+
+/* EXPERIENCE / EDUCATION */
+.card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* CONTACT */
+.contact {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 20px;
+}
+
+/* FOOTER */
+footer {
+  background: #004aad;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 30px;
+}
