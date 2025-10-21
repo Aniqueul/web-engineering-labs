@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Calculator with Sub Menu</title>
+    <style>
+      body {
+        background: #1e1e1e;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .calculator {
+        background: #2b2b2b;
+        padding: 20px;
+        border-radius: 15px;
+        width: 320px;
+        position: relative;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .menu {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 24px;
+      }
+
+      .submenu {
+        display: none;
+        position: absolute;
+        top: 40px;
+        right: 10px;
+        background: #3b3b3b;
+        border-radius: 8px;
+        width: 180px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        z-index: 10;
+      }
+
+      .submenu button {
+        width: 100%;
+        background: none;
+        border: none;
+        color: #fff;
+        padding: 10px;
+        text-align: left;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      .submenu button:hover {
+        background: #555;
+      }
+
+      .display {
+        width: 100%;
+        height: 50px;
+        text-align: right;
+        font-size: 24px;
+        margin-bottom: 15px;
+        border: none;
+        border-radius: 8px;
+        padding-right: 10px;
+        background: #444;
+        color: white;
+      }
+
+      .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+      }
+
+      button {
+        padding: 15px;
+        border: none;
+        border-radius: 8px;
+        background: #555;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      button:hover {
+        background: #777;
+      }
+
+      .scientific,
+      .unit,
+      .currency {
+        display: none;
+        margin-top: 10px;
+      }
+
+      .extra-input {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        border-radius: 6px;
+        border: none;
+        background: #444;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="calculator">
+      <div class="menu">⋯</div>
+      <div class="submenu" id="submenu">
+        <button id="scientificBtn">Scientific Mode</button>
+        <button id="unitBtn">Unit Conversion</button>
+        <button id="currencyBtn">Currency Conversion</button>
+      </div>
+
+      <input type="text" id="display" class="display" readonly />
+
+      <div class="buttons" id="buttons">
+        <button onclick="appendValue('7')">7</button>
+        <button onclick="appendValue('8')">8</button>
+        <button onclick="appendValue('9')">9</button>
+        <button onclick="appendValue('/')">÷</button>
+
+        <button onclick="appendValue('4')">4</button>
+        <button onclick="appendValue('5')">5</button>
+        <button onclick="appendValue('6')">6</button>
+        <button onclick="appendValue('*')">×</button>
+
+        <button onclick="appendValue('1')">1</button>
+        <button onclick="appendValue('2')">2</button>
+        <button onclick="appendValue('3')">3</button>
+        <button onclick="appendValue('-')">−</button>
+
+        <button onclick="appendValue('0')">0</button>
+        <button onclick="appendValue('.')">.</button>
+        <button onclick="calculate()">=</button>
+        <button onclick="appendValue('+')">+</button>
+
+        <button
+          onclick="clearDisplay()"
+          style="grid-column: span 4; background: #c0392b"
+        >
+          Clear
+        </button>
+      </div>
+
+      <!-- Scientific Mode -->
+      <div class="scientific" id="scientific">
+        <button onclick="sqrt()">√</button>
+        <button onclick="square()">x²</button>
+        <button onclick="sin()">sin</button>
+        <button onclick="cos()">cos</button>
+        <button onclick="tan()">tan</button>
+      </div>
+
+      <!-- Unit Conversion -->
+      <div class="unit" id="unit">
+        <h4>Unit Conversion (Meters ⇄ Centimeters)</h4>
+        <input
+          type="number"
+          id="unitInput"
+          class="extra-input"
+          placeholder="Enter value"
+        />
+        <button onclick="toCm()">To cm</button>
+        <button onclick="toM()">To m</button>
+      </div>
+
+      <!-- Currency Conversion -->
+      <div class="currency" id="currency">
+        <h4>Currency Conversion (USD ⇄ PKR)</h4>
+        <input
+          type="number"
+          id="currencyInput"
+          class="extra-input"
+          placeholder="Enter amount"
+        />
+        <button onclick="usdToPkr()">USD → PKR</button>
+        <button onclick="pkrToUsd()">PKR → USD</button>
+      </div>
+    </div>
+
+    <script>
+      const display = document.getElementById("display");
+      const submenu = document.getElementById("submenu");
+      const scientific = document.getElementById("scientific");
+      const unit = document.getElementById("unit");
+      const currency = document.getElementById("currency");
+
+      document.querySelector(".menu").addEventListener("click", () => {
+        submenu.style.display =
+          submenu.style.display === "block" ? "none" : "block";
+      });
+
+      document.getElementById("scientificBtn").addEventListener("click", () => {
+        scientific.style.display =
+          scientific.style.display === "block" ? "none" : "block";
+        unit.style.display = "none";
+        currency.style.display = "none";
+      });
+
+      document.getElementById("unitBtn").addEventListener("click", () => {
+        unit.style.display = unit.style.display === "block" ? "none" : "block";
+        scientific.style.display = "none";
+        currency.style.display = "none";
+      });
+
+      document.getElementById("currencyBtn").addEventListener("click", () => {
+        currency.style.display =
+          currency.style.display === "block" ? "none" : "block";
+        scientific.style.display = "none";
+        unit.style.display = "none";
+      });
+
+      function appendValue(val) {
+        display.value += val;
+      }
+
+      function clearDisplay() {
+        display.value = "";
+      }
+
+      function calculate() {
+        try {
+          display.value = eval(display.value);
+        } catch {
+          display.value = "Error";
+        }
+      }
+
+      // Scientific Functions
+      function sqrt() {
+        display.value = Math.sqrt(eval(display.value));
+      }
+      function square() {
+        display.value = Math.pow(eval(display.value), 2);
+      }
+      function sin() {
+        display.value = Math.sin(eval(display.value));
+      }
+      function cos() {
+        display.value = Math.cos(eval(display.value));
+      }
+      function tan() {
+        display.value = Math.tan(eval(display.value));
+      }
+
+      // Unit Conversion
+      function toCm() {
+        const val = document.getElementById("unitInput").value;
+        alert(`${val} meters = ${val * 100} cm`);
+      }
+      function toM() {
+        const val = document.getElementById("unitInput").value;
+        alert(`${val} cm = ${val / 100} meters`);
+      }
+
+      // Currency Conversion (example rate: 1 USD = 280 PKR)
+      function usdToPkr() {
+        const val = document.getElementById("currencyInput").value;
+        alert(`${val} USD = ${val * 280} PKR`);
+      }
+      function pkrToUsd() {
+        const val = document.getElementById("currencyInput").value;
+        alert(`${val} PKR = ${(val / 280).toFixed(2)} USD`);
+      }
+    </script>
+  </body>
+</html>
